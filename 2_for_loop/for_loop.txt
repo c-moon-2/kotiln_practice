@@ -1,0 +1,28 @@
+fun main(args: Array<String>){
+    // 'for'는 iterator를 제공하는 모든 것을 iterating 할 수 있다.
+    // 이는 iterating을 하려는 객체가 'iterator<>'를 반환하는 멤버 또는 확장함수 iterator()가 있음을 의미한다.
+    // 'iterator()'는 member 또는 확장 함수 next()를 가지고 있다.
+    // 그리고 Boolean타입을 반환하는 멤버 또는 확장 함수 hasNext()를 가지고 있다.
+    // 이 3개의 함수는 'operator' 키워드가 필요하다 (클래스의 open 키워드 처럼)
+    
+    for (i in 1..3) {
+        println(i)
+    }
+    for (i in 6 downTo 0 step 2) {
+        println(i)
+    }
+    
+    // range나 array를 iterating하는 for반복문은 index-based loop로 컴파일된다.(iterator 객체를 생성하는 것이 아닌)
+     
+    // 인덱스를 이용하여 array나 리스를 iterating하고 싶다면, 다음과 같이 기재할 수 있다.
+    val array = arrayOf("a", "b", "c")
+    for (i in array.indices) {
+        println(array[i])
+    }
+    
+    // 또한 'withIndex'를 이용하여 인덱스와 해당 element를 함께 추출할 수 있다.
+    for ((index, value) in array.withIndex()) {
+        println("the element at $index is $value")
+    }
+
+}
