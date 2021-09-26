@@ -1,0 +1,31 @@
+fun main(args: Array<String>){
+    // 코틀린에서는 if는 표현식이다. 즉 값을 리턴한다.
+    // 따라서 코틀린에서는 삼항연산자가 존재하지 않는다.
+    var a = 1
+    var b = 2
+
+    val max1 = if (a > b) a else b
+    /* 다음과 동일하다
+    var max: Int
+	if (a > b) {
+	    max = a
+	} else {
+	    max = b
+	} */
+    println("${max1}")
+    
+    // if문이 표현식으로 사용될 때는 if문의 블록 마지막에 변수명만 표기할 경우
+    // 해당 변수의 값이 할당할 변수에 리턴된다.
+    a=3
+    b=1
+    val max2 = if (a > b) {
+	    println("Choose a")
+	    a //
+	} else {
+	    println("Choose b")
+	    b //
+	}
+    println("$max2")
+    
+    // if를 표현식으로 사용할 때는 반드시 'else'문도 함께 사용해야 한다.
+}
