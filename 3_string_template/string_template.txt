@@ -1,0 +1,19 @@
+fun main(args: Array<String>) {
+    // String 타입 객체(리터럴)은 'template' 표현식을 포함하고 있습니다.
+    // 템플릿 표현식은 '$'기호로 시작하며 변수이름을 기재한다.
+    val i = 10
+    println("i = $i") // prints "i = 10"
+    
+    // 또는 표현식을 중괄호 안에 기재할 수 있다.
+    val s = "abc"
+    println("$s.length is ${s.length}") 
+    
+    // 템플릿을 raw string이나 escaped string 안에 사용할 수 있다.
+    // raw string(백슬래쉬를 이용한 escape를 지원하지 않는)에 '$'문자를 넣기 위해서는 다음과 같이 입력한다.
+	val price = """
+	${'$'}_9.99
+	"""
+    //$_9.99 error occur
+    println(price)
+
+}
