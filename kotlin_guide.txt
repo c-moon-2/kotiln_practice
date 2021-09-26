@@ -1,0 +1,250 @@
+// 출처 : https://kotlinlang.org/docs/basic-syntax.html
+//
+// 1. 패키지 정의와 임포트
+// 더 자세한 내용(https://kotlinlang.org/docs/packages.html)
+// package my.demo
+// 
+// import kotlin.text.*
+// 패키지의 경우 패키지 명세 순서와 동일한 순서로 중첩된 폴더에 위치시킬 필요 없음.
+// 파일 시스템 어느 곳에나 위치 시켜도 된다.
+
+
+// 5. 탑 레벨에서 변수 및 함수 정의
+val PI = 3.14
+var y = 0
+
+fun incrementY() { 
+    y += 1 
+}
+
+// 2.프로그램 시작 지점
+fun main(args: Array<String>) { // args: Array<String> 는 생략 가능하다. 
+    println(args.contentToString()) // 단, args.contentToString()는 사용 불가
+    println("Hello, world!!!")
+    println()
+    
+    // 3. 표준 출력
+    print("Hello") // 개행을 포함하지 않음
+    print("world!")
+    println()
+    println("Hello world!") // 개행을 포함함
+	println(42)
+    println()
+    
+    // 4. 함수 사용(main 함수 밖, sum함수 참고)
+    // 더 자세한 내용(https://kotlinlang.org/docs/functions.html)
+    println(sum1(1, 2))
+    println(sum2(3, 4))
+    printSum(5, 6)
+    println()
+    
+    // 5. 변수
+    // 더 자세한 내용(https://kotlinlang.org/docs/properties.html) (클래스 속성(Property)관련 내용)
+    // 읽기 전용 지역 변수는 val을 이용하여 정의(단 한번만 정의됨.)
+    val a: Int = 1
+    val b = 2 // Int 타입으로 추론됨
+    val c: Int // 값을 할당하지 않은 채로 선언할 경우 반드시 변수의 타입을 표기해야 함.
+    c=3 // 할당을 미룬다는 것이다.
+    //c=4 // 에러가 발생한다!
+    println("a = $a, b = $b, c = $c")
+    
+    // 재할당이 가능한 변수는 var을 이용하여 정의
+    var x = 5
+    x+=1
+    println("x = $x")
+    
+    // main 함수 밖, 탑 레벨에서도 변수를 정의할 수 있으며 함수 내부에서 참조할 수 있다.(main 함수 밖 PI, y 변수, incrementY함수 참고)
+    println("y = $y; PI = $PI")
+    incrementY()
+    println("y = $y; PI = $PI")
+    println()
+
+    // 6. 클래스와 인스턴스 생성(main 함수 밖, )
+    // class 키워드를 이용하여 클래스를 정의한다.
+    // 더 자세한 내용1 (https://kotlinlang.org/docs/classes.html) (클래스에 관련된 내용)
+    // 더 자세한 내용2 (https://kotlinlang.org/docs/object-declarations.html) (클래스 인스턴스 생성 관련 심화 내용)
+    val rectangle = Rectangle(5.0, 2.0) // 인스턴스 생성
+    println("The perimeter is ${rectangle.perimeter}")
+    println()
+    
+    // 7. 주석
+    // 더 자세한 내용(https://kotlinlang.org/docs/kotlin-doc.html) (주석을 이용한 문서화 관련 내용)
+    // 는 한 줄 주석
+    /* 는 
+       /* 여러
+          줄 */
+       주석 */  //여러 줄 주석은 중접이 가능하다.
+       
+    // 8. 문자열 템플릿
+    // 더 자세한 내용(https://kotlinlang.org/docs/basic-types.html#string-templates)
+    var a_8 = 1
+    val s1 = "a_8 is $a_8"
+    a_8 = 2
+    val s2 = "${s1.replace("is", "was")}, but now is $a_8" // '$' 중괄호를 열어서 표현식을 사용할 수 있다.
+    println(s2)
+    println()
+    
+    // 9. 조건문
+    // 더 자세한 내용(https://kotlinlang.org/docs/control-flow.html#if-expression)
+    fun maxOf_1(a: Int, b: Int): Int {
+	    if (a > b) {
+	        return a
+	    } else {
+	        return b
+	    }
+	}
+    println("max of 0 and 42 is ${maxOf_1(0, 42)}")
+    
+    fun maxOf_2(a: Int, b: Int) = if (a > b) a else b // if문을 다음과 같이 표현식으로 사용할 수 있다.
+    println("max of 0 and 42 is ${maxOf_2(0, 42)}")
+    println()
+    
+    // 10. for 반복문
+    // 더 자세한 내용(https://kotlinlang.org/docs/control-flow.html#for-loops)
+    val items = listOf("apple", "banana", "kiwifruit")
+    for (index in items.indices){
+        println("item at $index is ${items[index]}")
+    }
+    println()
+    
+    // 11. while 반복문
+    // 더 자세한 내용(https://kotlinlang.org/docs/control-flow.html#while-loops)
+    var index = 0
+    while(index < items.size){
+        println("item at $index is ${items[index]} // using while loop")
+    	index++
+    }
+    println()
+    
+    // 12. when 표현식 (유사 switch)
+    // 더 자세한 내용(https://kotlinlang.org/docs/control-flow.html#when-expression)
+    fun describe(obj: Any): String =
+    	when (obj){
+            1			-> "One"
+            "Hello"		-> "Greeting"
+            is Long		-> "Long"
+            !is String	-> "Not a string"
+            else		-> "Unknown"
+        }
+    println(describe(1))
+    println(describe("Hello"))
+    println(describe(1000L))
+    println(describe(2))
+    println(describe("other"))
+    println()
+    
+    // 13. Ranges
+    // 더 자세한 내용(https://kotlinlang.org/docs/ranges.html)
+    val x_13 = 10
+    val y_13 = 9
+    if (x_13 in 1..y_13+1){ // in 연산자를 사용하여 x_13이 ranage 안에 포함되는지 확인
+    // ..은 끝에 기재한 숫자까지 포함한다.(파이썬과 달리...)
+    	println("fits in range")
+    }
+    
+    val list = listOf("a", "b", "c")
+    if (-1 !in 0..list.lastIndex) {
+        println("-1 is out of range")
+    }
+
+    for (x in 1..10 step 2) {
+	    print(x)
+	}
+	println()//
+	for (x in 9 downTo 0 step 3) { // downTo : 역방향으로 어디까지?
+	    print(x)
+	}
+    println()//
+    println()
+    
+    // 14. Collections
+    // 더 자세한 내용(https://kotlinlang.org/docs/collections-overview.html)
+    for (item in items) {
+        println(item)
+    }
+    
+    when {
+        "orange" in items -> println("juicy")
+        "apple" in items -> println("apple is fine too")
+    }
+    
+    val fruits = listOf("banana", "avocado", "apple", "kiwifruit")
+    fruits // 람다 표현식을 이용하여 컬렉션을 필터링 및 매핑하기
+        .filter { it.startsWith("a") }
+        .sortedBy { it }
+        .map { it.uppercase() }
+        .forEach { println(it) }
+    println()
+        
+    // 15. Nullable 값과 null 체크
+    // 더 자세한 내용(https://kotlinlang.org/docs/null-safety.html) (안전한 널 처리 관련 내용)
+    // 참조시 null값을 리턴할 수 있음(nullable) 명시해야 한다. 리턴 타입 뒤에 '?'를 기제한다.
+    fun parseInt(str: String): Int? {
+	    return str.toIntOrNull() // 해당 메서드가 Int를 리턴할 수 없다면 null을 리턴한다.
+	}
+    fun printProduct(arg1: String, arg2: String) {
+    	val x_15 = parseInt(arg1)
+    	val y_15 = parseInt(arg2)
+	
+    	if (x_15 != null && y_15 != null) {
+    	    println(x_15 * y_15)
+    	}
+    	else {
+    	    println("'$arg1' or '$arg2' is not a number")
+    	}
+        
+        if (x_15 == null) {
+	        println("Wrong number format in arg1: '$arg1'")
+	        return
+	    }
+	    if (y_15 == null) {
+	        println("Wrong number format in arg2: '$arg2'")
+	        return
+	    }
+	}
+    printProduct("6", "7")
+    printProduct("a", "7")
+    printProduct("a", "b")
+    printProduct("99", "b")
+    println()
+    
+    // 16. 타입 체크와 자동 캐스팅
+    // 더 자세한 내용1 ([6. 클래스와 인스턴스 생성]의 더 자세한 내용1 참고)
+    // 더 자세한 내용2 (https://kotlinlang.org/docs/typecasts.html) (타입 캐스팅 관련 내용)
+    // 'is' 연산자는 표현식이 타입의 인스턴스인지 체크한다.
+    // 만약 immutable 지역 변수나 (클래스의) 프로퍼터가 특정 타입으로 확인이 된다면, 명시적으로 캐스팅할 필요 없다.
+	fun getStringLength(obj: Any): Int? {
+	    if (obj is String) { // 'is'에 의해서 타입체크가 true로 평가된 인스턴스는 (암묵적으로) 자동으로 평가 기준('is'의 오른편)으로 캐스팅된다.(꼭 if문 블록 안에서만이 아니라 함수가 종료되기 직전까지 유효함)
+	        return obj.length
+	    }
+	    return null // 'is'연산에서 타입체크에서 false로 평가된 인스턴스는 그대로 Any타입(함수 파라미터 타입에 의해 캐스팅된)을 유지하게 된다.
+	}
+    fun printLength(obj: Any) {
+        println("Getting the length of '$obj'. Result: ${getStringLength(obj) ?: "Error: The object is not a string"} ")
+        // '?:'는 삼항 연산자와 비슷하며 null을 위해 사용되는 연산자다.
+        // 좌항의 연산 결과가 null인 경우 반환할 값을 지정할 때 사용하는 연산자, null이 아닐 경우 좌항의 결과값이 리턴됨.
+    }
+    printLength("Incomprehensibilities")
+    printLength(1000)
+    printLength(listOf(Any()))  
+}
+
+// 4. 함수 정의
+fun sum1(a: Int, b: Int): Int{
+    return a+b
+}
+
+fun sum2(a: Int, b: Int) = a + b // 함수의 body는 표현식이 될 수 있다. 이렇게 사용할 경우 리턴 타입은 자동으로 추론됨.
+
+fun printSum(a: Int, b: Int): Unit { // 리턴값이 없는 함수는 리턴 타입으로 Unit을 사용(린턴 타입 표기 생략가능)
+    println("sum of $a and $b is ${a + b}")
+}
+
+// 6. 클래스 정의
+open class Shape // 클래스는 기본적으로 final(상속불가)이다. open 키워드를 이용하여 상속이 가능하게 만든다.
+ 
+class Rectangle(var height: Double, var length: Double) :Shape() { // 클래스의 프로퍼티는 괄호 안이나 클래스 바디 안에 선언할 수 있다
+// 괄호 끝에 ':'를 이용하여 상속받을 수 있다.
+    var perimeter = (height + length) * 2
+    // 클래스 내부에 생성자를 정의 하지 않더라도 클래스 정의시 괄호안에 있는 프로퍼티 파라미터를 전달하여 인스턴스를 생성할 수 있다.
+}
