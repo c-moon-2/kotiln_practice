@@ -1,0 +1,80 @@
+fun main(args: Array<String>){
+    // 코틀린에서는 'kotlin.ranges'패키지에 있는 'rangeTo'함수를 이용하여
+    // 쉽게 값들의 범위를 생성할 수 있으며, '..' 연산자로 대개 이용한다.
+    // 'rnageTo()'는 'in' 또는 '!in' 함수와 함께 사용된다.
+
+    // Integral 타입 range(IntRange, LongRange, CharRnage)들은 반복될 수 있다는
+	// 추가적인 특징이 있으며, 이 range들은 integral 타입에 해당하는
+	// progression들 이다.
+	for (i in 1..4) print(i)
+    println()
+    
+    // 숫자들을 역순으로 iterating하기 위해, '..'대신 'downTo'함수를 이용한다.
+    for (i in 4 downTo 1) print(i)
+    println()
+    
+    // 스텝에 대한 임의의 크기를 반영하여 숫자를 iterating할 수 있다.
+    // 'step'함수를 이용한다.
+    for (i in 1..8 step 2) print(i)
+    println()
+    for (i in 8 downTo 1 step 2) print(i)
+    println()
+    
+    // 마지막 요소를 포함하지 않게 iterating하기 위해, '..'대신 'until'을 이용한다.
+    for (i in 1 until 10) {
+        print(i)
+    }
+    println()
+    
+    // range는 수학적인 의미에서 폐구간을 정의한다.
+    // 범위는 둘다 범위에 포함된 두 개의 끝점 값으로 정의된다.
+    // range는 comparable 타입으로 정의되어 있다. 순서가 있다면,
+    // 임의의 인스턴스가 지정된 두 인스턴스 사이의 범위에 있는지 여부를 정의할 수 있다.
+    
+    // range의 주된 연산자는 주로 'in'이나 '!in'으로 사용되는 'contains' 다.
+    
+    // 사용자 정의 클래스에 대한 range를 만들기 위해서, range start값에 대한 rangeTo() 함수를 호출하고,
+    // end 값을 파라미터로 전달해야 한다.
+    // rangeTo()는 종종 다음과 같은 연산자 형식으로 호출된다.
+    val versionRange = Version(1, 11)..Version(1, 30)
+    println(Version(0, 9) in versionRange)
+    println(Version(1, 20) in versionRange)
+    
+    // integral타입(Int, Long, Char)들은 arithmetic progression(sequence)으로 다뤄진다.
+    // 코틀린에서는 이러한 progression들은 특별한 타입으로 정의된다.(IntProgression, LongProgression, CharProgression)
+    // Progression들은 3가지 기본적인 property를 가지고 있다 : first, last, step(0이 아님)
+    // 'first'는 첫 번째 요소를 의미하며, 다음 요소들은 이전 요소에 step을 더한 것이다.
+    
+    // 암묵적으로 range를 iterating 함으로써 progression을 만들 때, 이 progression의 first와 last요소는
+    // range의 endpoint들이며 step은 1이다.
+    for (i in 1..10) print(i)
+    
+    // 사용자 정의 progression step을 정의하고 싶다면, range에서 step함수를 이용한다.
+    for (i in 1..8 step 2) print(i)
+    
+    // progression의 last는 다음과 같은 방식으로 계산된다.
+    // 양수 step: (last - first) % step == 0 을 만족하는 end값보다 크지 않은 최대값
+    // 음수 step: (last - first) % step == 0 을 만족하는 end값보다 작지 않은 최소값
+    // 따라서, last는 항상 지정한 end값과 동일하지 않다.
+    for (i in 1..9 step 3) print(i)
+    
+    // 역순으로 iterating하는 progression을 만들기 위해, range를 정의할 때 '..'대신, 'downTo'를 이용
+    for (i in 4 downTo 1) print(i)
+    
+    // 이미 progression을 정의하였다면, reversed함수를 이용하여 역순으로 iterating할 수 있다.
+    for (i in (1..4).reversed()) print(i)
+    
+    // Progression들은 Iterable<N>을 구현한다. 이 때 N은 Int, Long, Char이다.
+    // 따라서 map, filter, 등의 다양한 collection함수에서 사용할 수 있다.
+    println((1..10).filter { it % 2 == 0 })
+    
+}
+
+class Version(val major: Int, val minor: Int): Comparable<Version> {
+    override fun compareTo(other: Version): Int {
+        if (this.major != other.major) {
+            return this.major - other.major
+        }
+        return this.minor - other.minor
+    }
+}

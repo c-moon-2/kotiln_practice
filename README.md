@@ -9,7 +9,7 @@ Repository for summary of kotiln language syntax.
 * ✅  6. 문자열 템플릿 (매우 짧음)  
 
 * 🟩  1. 패키지 및 임포트 (짧은 페이지)
-* 🟩 13. range (짧은 페이지)  
+* ✅ 13. range (짧은 페이지)  
 
 * 🟩  3. 변수(프로퍼티) (긴 페이지)
 * 🟩 14. 컬렉션 (긴 페이지)
